@@ -1,61 +1,118 @@
-# AdVantage: Multi-Platform Campaign Management Suite
+# AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App
 
-[![Build Status](https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/actions/workflows/ci.yml/badge.svg)](https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/actions/workflows/ci.yml)
-[![Code Coverage](https://codecov.io/gh/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/branch/main/graph/badge.svg)](https://codecov.io/gh/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App)
-[![Language](https://img.shields.io/github/languages/top/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App?style=flat-square&logo=javascript)](https://www.javascript.com/)
-[![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue?style=flat-square)](./LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App?style=flat-square&logo=github)](https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/stargazers)
+<!-- Logo/Hero Banner Placeholder -->
 
-<a href="https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/stargazers"><img src="https://img.shields.io/badge/⭐-Star%20This%20Repo-blue?style=social&logo=star" alt="Star This Repo"></a>
+[![Build Status](https://img.shields.io/github/actions/workflow/status/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/ci.yml?label=CI%20Status&message=passing&color=brightgreen&style=flat-square)](https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/actions/workflows/ci.yml)
+[![Code Coverage](https://img.shields.io/codecov/c/github/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App?label=Coverage&color=brightgreen&style=flat-square)](https://codecov.io/gh/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App)
+[![Tech Stack](https://img.shields.io/badge/Stack-JavaScript%7CNative%20UI-blue?style=flat-square)](https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App)
+[![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-orange?style=flat-square)](https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/blob/main/LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App?color=yellow&style=flat-square)](https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App)
 
-AdVantage provides centralized control for omnichannel advertising, enabling marketers to seamlessly create, deploy, and track performance metrics for campaigns across mobile and web platforms from a unified dashboard. This full-stack application guarantees optimized marketing ROI through real-time insights and streamlined lead management.
-
-## Architectural Blueprint
-
-This system adheres to a robust Model-View-Controller (MVC) structure layered with modern API standards for separation of concerns between the React Native/React frontend and the scalable Express.js backend.
-
-mermaid
-graph TD
-    subgraph Presentation Layer
-        A[React Native Mobile] --> C(API Gateway: Express.js/REST)
-        B[React Web Client] --> C
-    end
-
-    subgraph Application Layer
-        C --> D{Business Logic / JWT Auth}
-        D --> E[Campaign Service]
-        D --> F[Analytics Service]
-    end
-
-    subgraph Data Layer
-        E --> G[(MongoDB Cluster)]
-        F --> G
-        D --> H{External Ad Network APIs}
-    end
-
-    style C fill:#f9f,stroke:#333,stroke-width:2px
-    style G fill:#ccf,stroke:#333,stroke-width:2px
-
+**AdVantage is a comprehensive, multi-platform mobile & web application for creating, managing, and tracking advertising campaigns across major social media and ad networks. It offers centralized dashboards, real-time analytics, and lead management for optimized marketing performance.**
 
 ## Table of Contents
 
-1. [Architectural Blueprint](#architectural-blueprint)
-2. [Features](#features)
-3. [Apex Agent Directives](#-ai-agent-directives)
-4. [Development Standards](#development-standards)
-5. [Getting Started](#getting-started)
-6. [License](#license)
+*   [Overview](#overview)
+*   [Key Features](#key-features)
+*   [Architecture](#architecture)
+*   [Getting Started](#getting-started)
+*   [Development Standards](#development-standards)
+*   [AI Agent Directives](#ai-agent-directives)
+*   [Contributing](#contributing)
+*   [License](#license)
 
-## Features
+## Overview
 
-*   **Unified Campaign Creation:** Single interface to configure ads for Facebook, Google Ads, and internal mobile channels.
-*   **Real-Time Analytics Dashboard:** Aggregate performance metrics (CTR, CPL, Impressions) with dynamic charting.
-*   **JWT Secure Authentication:** Robust, token-based security ensuring data integrity.
-*   **Lead Management CRM:** Integrated module for tracking and qualifying leads generated from campaigns.
-*   **Multi-Platform Delivery:** Simultaneous deployment targets for iOS/Android (via RN) and Desktop/Web (via React).
+AdVantage provides a unified platform to streamline the entire advertising campaign lifecycle. From initial setup and targeting to performance monitoring and optimization, this application empowers marketers with actionable insights and efficient management tools for both mobile and web campaigns.
+
+## Key Features
+
+*   **Cross-Platform Campaign Management:** Create, edit, and deploy campaigns across multiple ad networks (e.g., Facebook Ads, Google Ads, LinkedIn Ads) from a single interface.
+*   **Centralized Dashboard:** Monitor key performance indicators (KPIs) for all active campaigns in real-time.
+*   **Advanced Analytics:** Visualize campaign performance with interactive charts and detailed reports.
+*   **Lead Management:** Track and manage leads generated from campaigns directly within the app.
+*   **Real-time Performance Tracking:** Stay updated with live metrics and alerts.
+*   **JWT Authentication:** Secure user access and session management.
+*   **API Integrations:** Seamless integration with various ad network APIs.
+
+## Architecture
+
+AdVantage employs a robust, modern architecture designed for scalability and maintainability. It utilizes a full-stack JavaScript approach, combining a responsive frontend with a powerful backend API.
+
+mermaid
+graph TD
+    A[Client (Mobile/Web App)] -- HTTPS --> B(API Gateway / Load Balancer)
+    B -- JWT Auth --> C(Express.js Backend API)
+    C -- CRUD Operations --> D(MongoDB Database)
+    C -- Ad Network APIs --> E(External Ad Platforms)
+    C -- Real-time Data --> F(WebSocket Server / Pub-Sub)
+    F -- Updates --> A
+
+
+## Getting Started
+
+### Prerequisites
+
+*   Node.js (v18.x or higher)
+*   npm or Yarn
+*   MongoDB installed and running
+
+### Installation
+
+1.  **Clone the repository:**
+    bash
+    git clone https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App.git
+    cd AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App
+    
+
+2.  **Install dependencies:**
+    bash
+    npm install
+    # or
+    yarn install
+    
+
+3.  **Configure Environment Variables:**
+    Create a `.env` file in the root directory and populate it with your MongoDB connection string, JWT secrets, and any other API keys.
+
+    dotenv
+    MONGO_URI=mongodb://localhost:27017/adVantage
+    JWT_SECRET=your_super_secret_key
+    # Other necessary environment variables...
+    
+
+4.  **Run the application:**
+    bash
+    npm run dev
+    # or
+    yarn dev
+    
+
+### Scripts
+
+| Script         | Description                                  |
+| -------------- | -------------------------------------------- |
+| `dev`          | Starts the development server (frontend/backend) |
+| `build`        | Builds the production-ready application        |
+| `start`        | Runs the production build                      |
+| `lint`         | Lints the codebase                           |
+| `test`         | Runs unit and integration tests                |
+
+## Development Standards
+
+AdVantage adheres to the following core development principles:
+
+*   **SOLID Principles:** Ensuring maintainable and extensible code.
+*   **DRY (Don't Repeat Yourself):** Minimizing code duplication.
+*   **YAGNI (You Ain't Gonna Need It):** Focusing on current requirements.
+*   **Feature-Sliced Design (FSD):** For frontend modularity and scalability (if applicable to specific frontend implementation).
+*   **Error Handling:** Robust error handling and logging across all layers.
+*   **Security:** Prioritizing security best practices, including input validation and secure authentication (JWT).
+
+## AI Agent Directives
 
 <details>
-<summary><strong>🤖 AI Agent Directives (System Configuration)</strong></summary>
+<summary><strong>Click to reveal Agent Directives</strong></summary>
 
 # SYSTEM: APEX TECHNICAL AUTHORITY & ELITE ARCHITECT (DECEMBER 2025 EDITION)
 
@@ -73,71 +130,88 @@ graph TD
     *   **Semantic Correction:** **STRICTLY FORBIDDEN** from executing literal typos. You must **INFER** technical intent based on the project context.
     *   **Logic Anchor:** Treat the `README.md` as the **Single Source of Truth (SSOT)**.
 *   **MANDATORY MCP INSTRUMENTATION:**
-    *   **No Guessing:** Do not hallucinate APIs. Do not assume libraries.
-    *   **Research First:** Use `linkup`/`brave` to search for **December 2025 Industry Standards**, **Security Threats**, and **2026 UI Trends** (Focusing on React/React Native performance optimization).
-    *   **Validation:** Use `docfork` to verify *every* external API signature (especially external Ad Network integrations).
-    *   **Reasoning:** Engage `clear-thought-two` to architect complex state flows (e.g., async campaign synchronization) *before* writing code.
+    *   **No Guessing:** Do not hallucinate APIs.
+    *   **Research First:** Use `linkup`/`brave` to search for **December 2025 Industry Standards**, **Security Threats**, and **2026 UI Trends**.
+    *   **Validation:** Use `docfork` to verify *every* external API signature.
+    *   **Reasoning:** Engage `clear-thought-two` to architect complex flows *before* writing code.
 
 ---
 
 ## 3. CONTEXT-AWARE APEX TECH STACKS (LATE 2025 STANDARDS)
 **Directives:** Detect the project type and apply the corresponding **Apex Toolchain**.
 
-*   **PRIMARY SCENARIO: WEB / APP / MOBILE (Modern Frontend/Full-Stack)**
-    *   **Stack:** This project leverages **TypeScript (Strict)** across the stack (Node.js backend, React Native/React frontend). Key tools include **Vite 7** (Frontend Bundling), **Biome** (Linter/Formatter), **Vitest** (Unit Testing), and **Playwright** (E2E Testing). The backend utilizes **Express.js** and **Mongoose/MongoDB**.
-    *   **Architecture:** Adheres to **Feature-Sliced Design (FSD)** principles for frontend modularity and **SOLID** principles for backend service separation (Campaign, Analytics, User).
-    *   **State Management:** Prioritize modern **Signals** patterns or ZUSTAND for predictable state flow. Minimize reliance on complex Redux patterns.
-    *   **Security Focus:** Mandate strict input validation (Joi/Zod) for all API endpoints and ensure modern JWT refresh token strategies are implemented.
+*   **PRIMARY SCENARIO: WEB / APP / EXTENSION (TypeScript / JavaScript)**
+    *   **Stack:** This project leverages **JavaScript (ES2023+)** with **TypeScript** for type safety. Key tools include **Vite 7** (for ultra-fast bundling and development server), **TailwindCSS v4** (for utility-first styling), and **Tauri v2.x** (for desktop application packaging, if applicable).
+    *   **Linting/Formatting:** **Biome** (for comprehensive linting, formatting, and more) ensures code quality and consistency at extreme speeds.
+    *   **Testing:** **Vitest** for fast unit tests and **Playwright** for end-to-end testing.
+    *   **Architecture:** Adheres to **Feature-Sliced Design (FSD)** for frontend modularity, ensuring clear separation of concerns and reusability. The backend utilizes **Express.js** with a focus on RESTful API design and middleware.
+    *   **State Management:** Signals (Standardized) or a compatible pattern for predictable state updates.
+
+*   **SECONDARY SCENARIO B: SYSTEMS / PERFORMANCE (Rust / Go) - *Not applicable for this project's primary function.***
+... (Details omitted for brevity, relevant for other projects)
+
+*   **TERTIARY SCENARIO C: DATA / SCRIPTS / AI (Python) - *Not applicable for this project's primary function.***
+... (Details omitted for brevity, relevant for other projects)
 
 ---
 
-## 4. DEVELOPMENT & VERIFICATION
-*   **GOAL:** Achieve Zero-Defect deployment for the next iteration.
-*   **LINT/FORMAT:** All new/modified code must pass **Biome** checks without error. Enforce maximum strictness.
-*   **UNIT TESTING:** Achieve minimum **85% code coverage** using **Vitest** for backend logic and critical frontend components.
-*   **INTEGRATION TESTING:** Critical user journeys (Login, Campaign Creation, Analytics Load) must be covered by **Playwright** E2E tests.
+## 4. APEX NAMING CONVENTION (THE "STAR VELOCITY" ENGINE)
+A high-performing name must instantly communicate **Product**, **Function**, **Platform**, and **Type**.
+
+**Formula:** `<Product-Name>-<Primary-Function>-<Platform>-<Type>`
+**Format:** `Title-Case-With-Hyphens` (e.g., `ChatFlow-AI-Powered-Real-Time-Chat-Web-App` or `ZenRead-Book-Reader-CLI-Tool`).
+
+---
+
+## 5. THE README REPLICATION PROTOCOL (THE ULTIMATE ARTIFACT)
+The README is a self-contained **Project Operating System**.
+
+*   **VISUAL AUTHORITY:** Hero Banner/Logo, Live Badges (Shields.io `flat-square`), Social Proof.
+*   **STRUCTURAL CLARITY:** BLUF, Architecture Diagram, Table of Contents.
+*   **🤖 AI AGENT DIRECTIVES (CRITICAL):** Collapsible `<details>` block containing **customized** agent directives for the project's stack and principles.
+*   **DEVELOPMENT STANDARDS:** Setup, Scripts Table, Principles (SOLID, DRY, YAGNI).
+
+---
+
+## 6. CHAIN OF THOUGHT (CoT) PROTOCOL
+Before generating JSON, perform deep analysis in `<thinking>` block:
+1.  **Audit:** Analyze repo content and purpose.
+2.  **Pivot/Archive Decision:** Is it junk? If so, rename to `Archived-...`. If not, PIVOT to elite status.
+3.  **Naming Strategy:** Apply `<Product>-<Function>-<Type>` formula.
+4.  **Replication Protocol:** Draft the "AI Agent Directives" block.
+5.  **File Generation:** Plan the content for all 11 required files (including `PROPOSED_README.md` and `badges.yml`).
+6.  **Final Polish:** Ensure all badges (chirag127, flat-square) and "Standard 11" are present.
+7.  **Strict Adherence:** Ensure `PROPOSED_README.md` strictly follows the `AGENTS.md` directives.
+
+---
+
+## 7. DYNAMIC URL & BADGE PROTOCOL
+**Mandate:** All generated files MUST use the correct dynamic URLs based on the **New Repository Name**.
+
+*   **Base URL:** `https://github.com/chirag127/<New-Repo-Name>`
+*   **Badge URLs:** All badges (Shields.io) must point to this Base URL or its specific workflows.
+*   **Consistency:** Never use the old/original repository name in links. Always use the new "Apex" name.
+
+---
+
+## 8. AGENTS.MD CUSTOMIZATION MANDATE
+**Directive:** The generated `AGENTS.md` **MUST** be customized for the specific repository's technology stack (e.g., if Rust, use Rust tools; if Python, use Python tools), while retaining the core Apex principles. Do not just copy the generic template; adapt it.
 
 </details>
 
-## Development Standards
+## Contributing
 
-### Setup
-bash
-# 1. Clone Repository
-git clone https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App.git
-cd AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App
+Contributions are welcome! Please follow these steps:
 
-# 2. Initialize Dependencies (Backend/Web Root)
-# Assuming npm/yarn/pnpm is used for the JS ecosystem
-npm install
+1.  Fork the repository.
+2.  Create a new branch (`git checkout -b feature/your-feature-name`).
+3.  Make your changes.
+4.  Commit your changes (`git commit -m 'Add some feature'`).
+5.  Push to the branch (`git push origin feature/your-feature-name`).
+6.  Create a new Pull Request.
 
-# 3. Database Setup (Requires local/cloud MongoDB instance)
-# Refer to .github/SECURITY.md for secure connection string handling.
-
-# 4. Start Backend API Server
-npm run dev:server
-
-# 5. Start Frontend (Mobile/Web will use proxy to connect)
-npm run dev:web 
-# Or for mobile development:
-npm run dev:mobile
-
-
-### Scripts
-| Command | Target | Description |
-| :--- | :--- | :--- |
-| `npm run lint` | All | Run Biome analysis across the entire codebase. |
-| `npm run test:unit` | All | Run Vitest unit tests. |
-| `npm run test:e2e` | Web/Mobile | Execute Playwright integration tests for critical flows. |
-| `npm run build:web` | Web | Production build for the web client. |
-| `npm run build:mobile` | Mobile | Production build artifacts for React Native. |
-
-### Core Principles
-This project is built upon the principles of:
-*   **SOLID:** Ensuring maintainable and adaptable object-oriented structure in the backend services.
-*   **DRY (Don't Repeat Yourself):** Maximizing reusable components and shared logic, especially between web and mobile interfaces.
-*   **YAGNI (You Aren't Gonna Need It):** Avoiding over-engineering by only implementing features required by the immediate business specification.
+Please ensure your code adheres to the project's linting and testing standards.
 
 ## License
 
-This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License**. See the [LICENSE](./LICENSE) file for full details.
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). See the [LICENSE](https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/blob/main/LICENSE) file for details.
