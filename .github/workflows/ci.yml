@@ -1,0 +1,158 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual triggering
+
+env:
+  NODE_VERSION: '20.x' # Recommended LTS Node.js version
+  NPM_CONFIG_COLOR: always # Enable colored output for better readability
+
+jobs:
+  # Job 1: Linting and Formatting Check
+  lint_and_format:
+    name: Code Quality Check (Lint & Format)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci # Uses package-lock.json for consistent installs
+
+      - name: Run ESLint
+        run: npm run lint # Assumes 'lint' script in package.json for ESLint
+
+      - name: Run Prettier Check
+        run: npm run format:check # Assumes 'format:check' script in package.json for Prettier
+
+  # Job 2: Build Application (Frontend & Backend)
+  build:
+    name: Build Application Assets
+    runs-on: ubuntu-latest
+    needs: lint_and_format # Depends on successful linting and formatting
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Project
+        # This script should handle building both client (React Native/Web) and server (Express.js)
+        # It might involve separate commands or a monorepo orchestration tool.
+        # Example: `npm run build:client && npm run build:server` or `npm run build`
+        run: npm run build
+
+  # Job 3: Run Unit and Integration Tests
+  test:
+    name: Run Unit & Integration Tests
+    runs-on: ubuntu-latest
+    needs: build # Depends on a successful build
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Tests
+        run: npm test # Assumes 'test' script in package.json (e.g., Jest/Vitest for client, Mocha/Jest for server)
+
+      - name: Collect Test Coverage (Optional)
+        # If using a coverage reporter like nyc or istanbul with Jest/Vitest
+        run: npm run test:coverage || true # Allow failure if coverage is not set up perfectly yet
+        continue-on-error: true # Do not fail the CI if coverage collection has issues initially
+
+      # - name: Upload coverage reports to Codecov
+      #   uses: codecov/codecov-action@v4
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     flags: unittests
+      #     name: codecov-umbrella
+
+  # Job 4: Run End-to-End (E2E) Tests with Playwright
+  e2e_tests:
+    name: Run End-to-End Tests
+    runs-on: ubuntu-latest
+    needs: test # Depends on successful unit and integration tests
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Start Application for E2E Tests
+        # This step starts the full application (frontend and backend) in the background.
+        # It's crucial for Playwright to have a running application to test against.
+        # The `start:ci` script should be configured in package.json to start the app in a CI-friendly way.
+        run: npm run start:ci &
+        env:
+          PORT: 3000 # Example port, adjust if your app uses a different one
+          CI: 'true' # Inform the application it's running in CI mode
+
+      - name: Wait for Application to be Ready
+        # Give the application some time to fully start up
+        run: npx wait-on http://localhost:3000 # Adjust URL and port as needed
+
+      - name: Run Playwright Tests
+        run: npx playwright test
+
+  # Job 5: Security Vulnerability Scan
+  security_scan:
+    name: Security Vulnerability Scan (npm audit)
+    runs-on: ubuntu-latest
+    needs: install_for_security # Explicitly define an installation job for clarity
+    steps:
+      - name: Run npm audit for critical vulnerabilities
+        run: npm audit --audit-level=critical
+        # Optionally, allow-failing if you track audit issues externally:
+        # continue-on-error: true
+
+  # Auxiliary job for security scan dependency installation
+  install_for_security:
+    name: Install Dependencies for Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      - name: Install Dependencies
+        run: npm ci
