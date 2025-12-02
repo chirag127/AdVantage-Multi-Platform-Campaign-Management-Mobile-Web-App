@@ -1,1 +1,73 @@
-package-lock.json
+# Dependencies and package manager
+npm_modules/
+node_modules/
+--/
+.pnpm-workspace.yaml
+
+# Build output
+dist/
+build/
+.output/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# IDE and editor
+.vscode/
+.idea/
+*.iml
+*.DS_Store
+
+# Test files
+coverage/
+*.test.ts
+*.spec.ts
+*.test.js
+*.spec.js
+
+# Build cache
+.vite/
+.nuxt/
+
+# Authentication tokens
+.auth -
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Docker
+.dockerignore
+docker-compose.yml
+Dockerfile
+
+# Cloudflare Pages / Vercel
+.vercel/
+.netlify/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Temporary files
+*.tmp
+
+# Uploads
+uploads/
