@@ -1,0 +1,30 @@
+build_status:
+  - url: "https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/actions/workflows/ci.yml"
+    image: "https://img.shields.io/github/actions/workflow/status/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/ci.yml?branch=main&style=flat-square"
+    title: "Build Status"
+coverage:
+  - url: "https://codecov.io/gh/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App"
+    image: "https://codecov.io/gh/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/branch/main?style=flat-square"
+    title: "Code Coverage"
+tech_stack:
+  - image: "https://img.shields.io/badge/language-javascript-323330?style=flat-square&logo=javascript"
+    title: "JavaScript"
+  - image: "https://img.shields.io/badge/framework-react%20native-61DAFB?style=flat-square&logo=react"
+    title: "React Native"
+  - image: "https://img.shields.io/badge/framework-express-000000?style=flat-square&logo=express"
+    title: "Express.js"
+  - image: "https://img.shields.io/badge/database-mongodb-47A248?style=flat-square&logo=mongodb"
+    title: "MongoDB"
+lint_format:
+  - image: "https://img.shields.io/badge/linter-eslint-4B32C3?style=flat-square&logo=eslint"
+    title: "ESLint"
+  - image: "https://img.shields.io/badge/formatter-prettier-127DB1?style=flat-square&logo=prettier"
+    title: "Prettier"
+license:
+  - url: "https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/blob/main/LICENSE"
+    image: "https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey?style=flat-square"
+    title: "License"
+stars:
+  - url: "https://github.com/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App/stargazers"
+    image: "https://img.shields.io/github/stars/chirag127/AdVantage-Multi-Platform-Campaign-Management-Mobile-Web-App?style=flat-square"
+    title: "GitHub Stars"
