@@ -1,73 +1,41 @@
-# Dependencies and package manager
-npm_modules/
-node_modules/
---/
-.pnpm-workspace.yaml
+# Dependency Directories
+/node_modules
+/build
+/dist
 
-# Build output
-dist/
-build/
-.output/
+# Development Artifacts
+.env*
+.npm/
+.pnpm-debug.log
+.yarn/cache
+.yarn/unplugged
 
-# Environment variables
-.env
-.env.*
-!.env.example
+# React Native / Mobile Build Artifacts
+/android/build
+/android/app/build
+/android/app/src/main/assets
+/ios/build
+
+# VS Code
+.vscode/
 
 # Logs
-logs
 *.log
+*.log.*.txt
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# IDE and editor
-.vscode/
-.idea/
-*.iml
-*.DS_Store
-
-# Test files
-coverage/
-*.test.ts
-*.spec.ts
-*.test.js
-*.spec.js
-
-# Build cache
-.vite/
-.nuxt/
-
-# Authentication tokens
-.auth -
-
-# OS generated files
+# Editor/OS Files
 .DS_Store
 Thumbs.db
 
-# Docker
-.dockerignore
-docker-compose.yml
-Dockerfile
+# Compiled Files (React/Vite/Webpack outputs)
+/public/build
+/coverage
 
-# Cloudflare Pages / Vercel
-.vercel/
-.netlify/
+# Secrets (Assume sensitive data might be stored locally)
+*.pem
 
-# Git
-.git/
-.gitignore
-.gitattributes
-
-# Temporary files
-*.tmp
-
-# Uploads
-uploads/
+# React Native
+/tmp
+/temp
+/reset-cache
